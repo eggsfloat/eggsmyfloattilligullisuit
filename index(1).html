@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6acc8">
+  <meta name="description" content="A strange, walkable archive of images, recordings, films, and found things.">
+  <title>Gallery Walk — the odd little archive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="orientation-hint" id="orientation-hint" role="status">
+    <span class="orientation-hint__symbol" aria-hidden="true">↻</span>
+    <p class="eyebrow">THE ARCHIVE IS WIDE</p>
+    <h2>Turn your device sideways.</h2>
+    <button id="orientation-dismiss" type="button">Continue in portrait</button>
+  </div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar__right">
+        <button class="collection-label" id="secret-access" type="button" aria-label="Archive visitor status">
+          <span class="status-dot" aria-hidden="true"></span><span>ARCHIVE VISITOR</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="foyer" id="foyer" aria-labelledby="foyer-title">
+        <div class="foyer__grid" aria-hidden="true"></div>
+        <div class="foyer__portal" aria-hidden="true"><span></span><i></i></div>
+        <div class="foyer__copy">
+          <p class="eyebrow"><span class="eyebrow__line"></span> UNOFFICIAL ARCHIVE · TIME UNKNOWN</p>
+          <h1 id="foyer-title">A museum in<br>the fourth <em>dimension.</em></h1>
+          <p class="foyer__note">Step through. The weather, the trees, even gravity might change.</p>
+          <button class="empty-room__button foyer__enter" id="enter-archive" type="button">Enter the archive <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="foyer__ticker" aria-hidden="true"><span>OBJECTS</span><i>✳</i><span>IMAGES</span><i>✳</i><span>SOUNDS FROM SOMEWHERE</span><i>✳</i><span>ODD LITTLE FILES</span></div>
+        <p class="foyer__edition">ARCHIVE 00<span>∞</span> / OPEN TO VISITORS</p>
+      </section>
+
+      <section id="archive-view" hidden>
+      <section class="intro" aria-label="Gallery information">
+        <div>
+          <p class="eyebrow"><span class="eyebrow__line"></span> SOMEWHERE BETWEEN HERE AND LATER</p>
+          <h1>Welcome to the <em>weird.</em></h1>
+        </div>
+        <div class="intro__note">
+          <span class="intro__note-mark" aria-hidden="true">✳</span>
+          <p>Take your time.<br>The room goes on.</p>
+        </div>
+      </section>
+
+      <section class="gallery" aria-label="Museum gallery">
+        <div class="gallery__toolbar">
+          <div class="room-label"><span class="room-label__number">01</span><span>THE LONG ROOM</span><span class="room-label__rule"></span><span id="room-count">0 PODIUMS</span></div>
+          <div class="gallery__actions">
+            <div class="curator-actions">
+              <button class="curator-button" id="rename-button" type="button" hidden>Rename podium</button>
+              <button class="add-button" id="add-button" type="button" hidden><span aria-hidden="true">+</span> Add to the room</button>
+              <button class="curator-button" id="signout-button" type="button" hidden>Lock archive</button>
+              <button id="remove-button" class="remove-button" type="button" hidden>Remove this podium <span aria-hidden="true">×</span></button>
+              <input id="file-input" class="visually-hidden" type="file" multiple hidden accept="image/*,audio/*,video/*,.pdf,.txt,.md,.doc,.docx,.zip,.glb,.gltf,.obj,.stl">
+            </div>
+            <div class="search-wrap">
+              <form class="search" id="search-form" role="search" aria-label="Search podiums">
+                <label for="search-input" class="visually-hidden">Search podiums</label>
+                <span class="search__icon" aria-hidden="true">⌕</span>
+                <input id="search-input" type="search" placeholder="Find a podium…" autocomplete="off" aria-controls="search-results">
+                <kbd>/</kbd>
+              </form>
+              <div class="search-results" id="search-results" role="listbox" aria-label="Matching podiums" hidden></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="room" id="room" aria-live="polite" aria-atomic="true">
+          <div class="room__back-wall" aria-hidden="true">
+            <div class="wall-art wall-art--left"><span></span></div>
+            <div class="wall-art wall-art--right"><span></span></div>
+            <div class="wall-lamp wall-lamp--left"></div>
+            <div class="wall-lamp wall-lamp--right"></div>
+            <div class="room__wall-hole" aria-hidden="true"><span></span></div>
+          </div>
+          <div class="room__phenomena" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="room__ceiling" aria-hidden="true"></div>
+          <div class="room__floor" aria-hidden="true"><span class="floor-inlay"></span></div>
+          <div class="room__vanishing-light" aria-hidden="true"></div>
+          <div class="podium-stage" id="podium-stage"></div>
+          <div class="room__caption" id="room-caption" hidden>
+            <div class="room__caption-head"><span id="current-index">— / —</span><span id="room-world">FOREST WITHOUT A SKY</span></div>
+          </div>
+          <div class="visually-hidden" aria-live="polite"><h2 id="work-title">A room of its own</h2><p id="work-meta">Waiting for the first strange thing.</p><time id="work-date" hidden></time></div>
+          <div class="room__walk-controls" aria-label="Walk between podiums">
+            <button class="walk-button" id="previous-button" type="button" aria-label="Previous podium" title="Previous podium (left arrow)"><span aria-hidden="true">←</span></button>
+            <button class="walk-button" id="next-button" type="button" aria-label="Next podium" title="Next podium (right arrow)"><span aria-hidden="true">→</span></button>
+          </div>
+          <div class="room__signal" id="room-signal" aria-live="assertive" hidden><span>NO SIGNAL</span></div>
+          <div class="eye-guide">
+            <aside class="eye-guide__panel" id="eye-panel" aria-label="Iris podium finder" hidden>
+              <div class="eye-guide__heading">
+                <span><i aria-hidden="true"></i> IRIS / ARCHIVE EYE</span>
+                <button id="eye-close" type="button" aria-label="Close Iris">×</button>
+              </div>
+              <p class="eye-guide__message" id="eye-message" role="status" aria-live="polite">Hi, I'm Iris. I keep an eye on this place. What should we find?</p>
+              <form class="eye-guide__form" id="eye-form">
+                <label class="visually-hidden" for="eye-query">Ask Iris to find a podium</label>
+                <input id="eye-query" type="search" placeholder="Podium 03, a title, audio…" autocomplete="off">
+                <button type="submit">Find</button>
+              </form>
+              <div class="eye-guide__results" id="eye-results"></div>
+              <button class="eye-guide__back" id="eye-back" type="button">Take me back to the foyer</button>
+            </aside>
+            <button class="eye-guide__trigger" id="eye-trigger" type="button" aria-label="Ask Iris to find a podium" aria-expanded="false" aria-controls="eye-panel" title="Ask Iris to find a podium">
+              <span class="eye-guide__orb" aria-hidden="true"><span class="eye-guide__sclera"><span class="eye-guide__iris"><span></span></span></span></span>
+            </button>
+          </div>
+          <div class="empty-room" id="empty-room" hidden>
+            <div class="empty-room__pedestal" aria-hidden="true"><span></span></div>
+            <p class="eyebrow" id="empty-eyebrow">SIGNAL NOT FOUND</p>
+            <h2 id="empty-title">This podium is<br><em>still dreaming.</em></h2>
+            <button class="empty-room__button" id="empty-add-button" type="button" hidden>Choose an exhibit <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="room__edge room__edge--left" aria-hidden="true"></div>
+          <div class="room__edge room__edge--right" aria-hidden="true"></div>
+        </div>
+
+      </section>
+
+      <footer class="footnote">
+          <button id="foyer-button" class="foyer-button" type="button">← BACK TO FOYER</button>
+          <span class="footnote__center"><i aria-hidden="true"></i> VISITORS MAY LOOK, NOT TOUCH</span>
+      </footer>
+      </section>
+    </main>
+    <dialog class="access-dialog" id="access-dialog" aria-labelledby="access-title">
+      <form id="access-form">
+        <button class="access-dialog__close" id="close-access" type="button" aria-label="Close curator access">×</button>
+        <p class="eyebrow"><span class="eyebrow__line"></span> ARCHIVE PERSONNEL</p>
+        <h2 id="access-title">Curator access</h2>
+        <label for="access-password">Archive key</label>
+        <input id="access-password" type="password" autocomplete="off" spellcheck="false" required>
+        <p class="access-dialog__error" id="access-error" role="status" aria-live="polite"></p>
+        <button class="empty-room__button" type="submit">Unlock archive <span aria-hidden="true">↗</span></button>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
