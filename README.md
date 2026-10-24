@@ -11,7 +11,6 @@ Files are kept in this browser's IndexedDB storage and stay on this device. Clea
 ## Use
 
 - The gallery fills the webpage when entered; it does not use browser fullscreen.
-- For curator access, click the **ARCHIVE VISITOR** status in the foyer five times, then enter `eggfloat`. Curator access lasts until the page is reloaded or locked.
 - Choose **Add to the room** to add one or more files while in curator mode.
 - Rename or remove the selected podium while in curator mode.
 - Use the left and right arrow keys or the on-screen arrows to walk between podiums.
